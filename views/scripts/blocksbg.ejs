@@ -1,0 +1,32 @@
+<script>
+    const triangles = document.querySelector('.triangles');
+
+    const squareWidth = 100; // Ancho de cada cuadrado
+const squareHeight = 100; // Alto de cada cuadrado
+
+const screenWidth = window.innerWidth;
+const screenHeight = window.innerHeight;
+
+const horizontalCount = Math.ceil(screenWidth / squareWidth);
+const verticalCount = Math.ceil(screenHeight / squareHeight);
+
+const totalSquares = horizontalCount * verticalCount + 34;
+
+// Crea los triangulos
+for (let i = 0; i < totalSquares; i++) {
+  const triangle = document.createElement('div');
+  triangle.classList.add('triangle');
+  triangle.style.top = `${Math.random() * 100}%`;
+  triangle.style.left = `${Math.random() * 100}%`;
+  triangle.style.animationDelay = `${Math.random() * 2}s`;
+  triangles.appendChild(triangle);
+}
+
+const section = document.getElementById('bg');
+setInterval(function(){
+  section.classList.add('active')
+}, 3500)
+setInterval(function(){
+  section.classList.remove('active')
+}, 7000)
+  </script>

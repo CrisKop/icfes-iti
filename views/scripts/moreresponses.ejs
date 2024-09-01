@@ -1,0 +1,52 @@
+<script>
+// Obtenemos el div opciones2
+var opciones2 = document.getElementById('opciones2');
+
+// Obtenemos el div opciones
+var opciones = document.getElementById('preguntasss');
+
+var xd = document.getElementById('enunciado');
+
+
+
+// Agregamos un evento change al div opciones2
+opciones2.addEventListener('change', function() {
+  // Verificamos si se seleccionó "Enunciado"
+  if (this.querySelector('input[name="type"]:checked').value == 1) {
+    opciones.style.display = 'none'; // Ocultamos el div opciones
+    xd.style.display = "none";
+  }
+  // Verificamos si se seleccionó "Pregunta"
+  else if (this.querySelector('input[name="type"]:checked').value == 2) {
+    opciones.style.display = 'flex'; // Mostramos el div opciones
+    xd.style.display = "block";
+  }
+});
+
+async function moreresponses() {
+  let siguientepregunta = document.getElementById('opciones').querySelectorAll("div").length + 1;
+  let letra = String.fromCharCode('a'.charCodeAt(0) + siguientepregunta - 1).toUpperCase();
+
+  document.getElementById('opciones').innerHTML += `<div><input type="radio" name="p1" value="${siguientepregunta}" required><label for=""> ${letra}</label></div>`;
+
+  var opciones = document.querySelectorAll('#opciones input[type="radio"]');
+  var cantidadOpciones = opciones.length;
+  var inputElement = document.getElementById('respquantity');
+  inputElement.value = cantidadOpciones;
+}
+
+async function lessresponses() {
+  var opcionesContainer = document.getElementById('opciones');
+  var opciones = opcionesContainer.querySelectorAll('div');
+
+  if (opciones.length > 3) {
+    opcionesContainer.removeChild(opciones[opciones.length - 1]); // Elimina el último div con el input y la etiqueta
+
+    var cantidadOpciones = opcionesContainer.querySelectorAll('#opciones input[type="radio"]').length;
+    var inputElement = document.getElementById('respquantity');
+    inputElement.value = cantidadOpciones;
+  }
+}
+
+
+</script>

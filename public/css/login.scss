@@ -1,0 +1,344 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+    font-family: Roboto,Arial,sans-serif;
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: black;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+body{
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bg {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(45deg, #272727, #2d2958, #915ba7);
+    background-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+    transition: background-position 1s;
+    overflow: hidden;
+    z-index: -2;
+  }
+
+  @keyframes color{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 1% 50%;
+    }
+  }
+  
+  .triangles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 100px);
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    filter: blur(5px);
+    opacity: 0.35;
+  }
+  
+  .triangle {
+    width: 100px;
+    height: 100px;
+    background: rgba(0,0,0,0.5);
+    transform-origin: center center;
+    animation: triangle-appear 1s ease-in-out forwards;
+    animation-delay: 1s;
+    opacity: 0;
+  }
+  
+  @keyframes triangle-appear {
+    0% {
+      transform: scale(0.1) rotate(0deg);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) rotate(360deg);
+      opacity: 1;
+    }
+  }
+
+  .bg.active .triangles .triangle{
+    animation: animateTwo 2s ease-in-out;
+  }
+
+  @keyframes animateTwo {
+    0% {
+      transform: scale(1) rotate(360deg);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.1) rotate(0deg);
+      opacity: 0;
+    }
+  }
+
+  .login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login div{
+    width: 80%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: rgba(34, 31, 43, 0.36);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.17), 0 0 40px rgba(0, 0, 0, 0.2), inset 0 0 40px rgba(255, 255, 255, 0.1), inset 0 0 80px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
+    text-align: center;
+
+    h1{
+        font-size:xx-large;
+        text-align: center;
+        color: #ffff;
+    }
+
+    h2{
+        text-shadow: none;
+    }
+
+    .red{
+      color: rgb(85, 52, 52);
+    }
+
+    .green {
+      color: rgb(0, 160, 53);
+      text-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
+    }
+
+    h3{
+        color: lightcoral;
+    }
+
+    button{
+        padding: 10px;
+        font-size: xx-large;
+        width: 200px;
+        border-radius: 10px;
+
+        &:hover{
+            background: rgba(255,255,255, 0.5);
+        }
+    }
+
+    a:visited{
+      color: rgb(95, 167, 196);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        z-index: -1;
+        border-radius: inherit;
+      }
+  }
+
+.loadscreencontainer{
+    z-index: 1000;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(120deg, #4d4d4d 0%, #222222 100%);
+    h1{
+        color: rgb(255, 255, 255);
+    }
+  }
+  .wrapper{
+  width: 100px;
+  height: 100px;
+  background: #2c3e50;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  .belt{
+    position: absolute;
+    top: 60%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 5px;
+    background: #fff;
+    animation: belt 2s linear infinite;
+    z-index: 2;
+    .t{
+      width: 5px;
+      height: 2px;
+      background: #fff;
+      position: absolute;
+      top: -2px;
+      left: calc(20px * var(--index));
+    }
+  }
+  .box{
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: -10%;
+    transform: translate(-50%, -50%);
+    animation: box 2s infinite;
+    animation-delay: calc(1s + (1s * var(--index)));
+    z-index: 1;
+  }
+  }
+  @keyframes belt{
+  to{
+    left: 100%;
+  }
+  }
+  @keyframes box{
+  25%{
+    top: 52%;
+    animation-timing-function: cubuc-bezier(.27,.37,.43,.07);
+  }
+  35%{
+    top: 52%;
+    left: 52%;
+    animation-timing-function: cubic-bezier(.33,.9,.86,.62);
+  }
+  50%{
+    top: 52%;
+    left: 55%;
+    animation-timing-function: linear;
+  }
+  75%{
+    top: 52%;
+    left: 75%;
+    animation-timing-function: linear;
+  }
+  100%{
+    top: 52%;
+    left: 120%;
+    animation-timing-function: linear;
+  }
+  }
+
+
+   //POP UP
+
+.popup-overlay{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    backdrop-filter: blur(10px);
+  }
+  
+  
+  .popup-content{
+    /*Hides pop-up when there is no "active" class*/
+    visibility:hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:#ffffff;
+    border:3px solid #666666;
+    width:fit-content;
+    height:fit-content;
+    max-width: 90vw;
+    padding: 100px;
+    border-radius: 50px;
+  
+    h2{
+      font-size: 50px;
+    }
+  
+     button{
+      font-size: 30px;
+      margin: 10px;
+      width: 150px;
+      height: 50px;
+      border-radius: 10px;
+      border: 2px solid black;
+     }
+  
+     button:hover{
+      background-color: black;
+      color: white;
+     }
+  }
+  .popup-overlay.active{
+    /*displays pop-up when "active" class is present*/
+    visibility:visible;
+    text-align:center;
+  }
+  
+  .popup-content {
+    /*Hides pop-up content when there is no "active" class */
+   visibility:hidden;
+  }
+  
+  .popup-overlay {
+    /*Hides pop-up content when there is no "active" class */
+   visibility:hidden;
+  }
+  
+  .popup-content.active {
+    /*Shows pop-up content when "active" class is present */
+    visibility:visible;
+  }
+
+  

@@ -1,0 +1,104 @@
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/moon.css' rel='stylesheet'>
+<link rel="stylesheet" href="/css/nav.css">
+<nav class="nav navcontainer" id="nav">
+    <div class="izqnav">
+    <%if(logo){%>
+    <h2 class="nav__logo">AdminPanel</h2>
+    <%}%>
+
+    <label class="switch">
+        <input type="checkbox" id="toggle-switch">
+        <span class="slider">
+            <div class="gg-moon"></div>
+        </span>
+      </label>
+    </div>
+      
+
+    <ul class="nav__links">
+
+        <li class="nav__item">
+            <a href="/" class="nav__link">Inicio</a>
+        </li>
+        <div class="profile">
+        <li class="nav__item">
+            <a href="#profilepop" class="nav__link name"><%=user.name.split(" ")[0]%></a>
+            <div id="accicon" class="accicon"></div>
+            <div id="profilepop" class="profilepop">
+                <div onclick="window.location.href='/profile'" class="button">Perfil</div>
+                <%if(user.rank !== "user"){%>
+                    <div onclick="window.location.href='/admin'" class="button">Admin Panel</div>
+                <%}%>
+                <div onclick="window.location.href='/logout'" class="button">Cerrar Sesión</div>
+            </div>
+        </li>
+    </div>
+    
+    </ul>
+
+    <a href="#nav" class="nav__hamburguer">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFrSURBVHhe7duxSQVBFEDRr4hgKIKBqV1YhSVpDWquuVZhCVqAiZnWsM6AU8Pe4Bx4/JdfGPi7O0fbth3oOP7/JUKQGEFiBIkRJEaQGEFiBIlZfwzPxtzOhd18jvlYQa7GfM+F3dyPuXNkxQgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDHr4eL5mKe5sJu3Ob7LinFkxQgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSs17hXox5nQu7eRnz7AZVhxtURYLECBIjSIwgMYLECBIjSIwgMYLECBIjSMx6uHg65mYu7OZrjhtUMY6sGEFiBIkRJEaQGEFiBIkRJEaQGEFiBIkRJEaQGEFiBIkRJEaQmPXG8GTM9VzYzc+YXxd2OlzYKRIkRpAYQWIEiREkRpAYQWIEiREkRpAYQWLWw8XLMe9zYTcPYx5d2IlxZMUIEiNIjCAxgsQIEiNIjCAph8MfxVg5lQYPgIkAAAAASUVORK5CYII=" class="nav__icon">
+    </a>
+
+    <a href="#" class="nav__close">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAWTSURBVHhe7Z3JjhxFEECnkQCJC78A2COQzAVxYrmDjPd9wytgse+bDV8CBwMnH+CG+AMszsYIEH9hQGye4UVOhNRu91K5dHVVVjwpVJp2ZWREPHereqaXNcdxHMdxHGcJjPTYiM3Nzfs5bCM2iF9Ho9GfcrtzJ8xqO4cdxF2EzOqG3F4Ekj9OfEf8Rxh/E1eJdT3NAebxNPEDMclPxG49LR2SnCH+kYwzuEk8q6cPGuZwjhj/TzuNy3p6PCwW24s2EP4iduqyQUL/54lbMowGpN1TWDjtrjcLkfKcLh0U9B0jQ/hRlzaHRdu31kYxOCn0GyvDeERT3IZcAcxCrhBiuZf4hs12bf1YN/R5nsNnxLw5ziJaSMomwj3E1xSbf0XRYTJlCLf02Aw23EHkIJfFezRdVdBX6sPUOA9ouuaw6MbW2mREyl5NVwX0U0LG95ouDhbu2lqfRTVS6KOEjH+JJzRlPCy+HNLkIU8s92nKXkL9F4hcGbL+nKZMhySfhnR5iJT9mrJXUHcpGXIhUAaSfRLS5iFSDmjKXkC93ZNhkLTUw1cvpFBnd2UYJC8l5aCm7CTU130ZBptcCtvlIVcbhzRlp6Cu/sgw2OzjsG0eIuWwpuwE1NM/GQabfhS2z6MzUqijvzIMNi8l5YimXAns338ZBkV8GMrJQ6Qc1ZStwr71yDAo5oNQVh4i5ZimbAX2q0+GQVHvh/LykD8ZH9eUS4V96pVhUNx7ocw8li6F/PXLMCjy3VBuHiLlhKYsCnmHI8Og2HdC2XmIlJOasgjkG54Mg6JLSTmlKbMgz3BlGBT/dmgjD5HyvKZMgvUvEMOWYdDEW6GdPGQYpzVlFKxzGZPQzJuhrTxkKGc0ZSM432XMgqbeCO3l0VgK57mMRdBcKSlnNeVU+HeX0RSafJ3YkI4zkGFNfcEAt7uMWGj2NaKElNuGxs8uIxWafpUoJoWjy8iF5ktJ+UKPOQxbhsEQXiFypeTiMsZhGC8Tq5LiMqbBUFYhxWXMg+FcJNqS4jKawJDakOIyYmBYLxHLkuIyUmBoLxKlpbiMHBiePNkrJcVllIAhfhnGmc8VTemkwhBL/NnV8HtIDjI8HWJJXEoKDE0+yKW0DMOlxMCwlinDcClNYEhndVht4FLmwXDks7nakmG4lGkwlNM6nFXgUsZhGKuUYbgUgSGc0mHkIOuv6DGHYUuheZEhLxPNQYYYXn3CscTzlmFKoemTRDEZBj+7lFhodikyDG53KU2hyRPE0mQY/LtLWQTNHSeWLsPgPJcyC5o6RrQmw+B8lzIJzRwl5C3POUTLMFjnUgyaWKkMg/UuheKPECuXYZBn0G/4PEx0RoZBvkG+JfoQ0TkZBnmHI4UiOy3DIH/9UijuINF5GQb71CuFog4Q8lmKObQmw2C/+qRQTC9lGOxbjxSK2E/0VobB/v2Xwub7iBIy5r7FuS2oo79S2HQvUY0Mg3r6J4XNRIZ860EOnZNhUFd/pLDJHqJaGQb1dV8KyXcT1cswqLO7UkgqX+4yGBkG9XZPCskGKcOg7u5IIclOQr6fMIfeyjCov5SU9OdbLN5GyHfd5tB7GQZ9lJAiv+t7UlPGwcKvQop0qpFh0E+JD7i5pumaw6K7iT/C8jSqk2HQVwkpcd9jyAJ5uEqlWhkG/eVKmfpNqKlfGzqPDeLCaDSq+h2v9Pc5h4uE9JtC3OwxKA9ZvweXzan+njEJ/abeUx7WFM1hUcz7wwcnw6DvWCnXdWkcLHyIaHLZO1gZBv3HSEn/znkWP0PMkyK/gk/6xOnaYA7yYrxFL5e9pKenQ5J14iox/oxdnuB8SzympznAPJ4irhGTXCcW3jNGemwECe/jsE7IFcJvXGnclNudO2FWD3J4lJBZ/cysfpHbHcdxHMcZBGtr/wO9uc27AEq1VAAAAABJRU5ErkJggg==" class="nav__icon">
+    </a>
+
+</nav>
+
+
+<script>
+    // Obtener la referencia al elemento de .profilepop
+const profilepop = document.querySelector('.profilepop');
+
+// Agregar un evento de clic al documento
+document.addEventListener('click', function(event) {
+  // Verificar si el clic ocurrió fuera de la .profilepop
+  if (!event.target.closest('.profilepop') && !event.target.closest('.profile')) {
+    // Ocultar la .profilepop
+    profilepop.classList.remove('visible');
+  }
+});
+
+// Agregar un evento de clic a la .profile
+const profile = document.querySelector('.profile');
+const profileLink = profile.querySelector('a');
+const profileIcon = profile.querySelector('#accicon');
+
+profileLink.addEventListener('click', function(event) {
+  event.preventDefault();
+  // Mostrar la .profilepop
+  profilepop.classList.add('visible');
+});
+
+profileIcon.addEventListener('click', function(event) {
+  event.preventDefault();
+  // Mostrar la .profilepop
+  profilepop.classList.add('visible');
+});
+</script>
+
+
+
+<script>
+    const toggleSwitch = document.getElementById('toggle-switch');
+    const body = document.body;
+    
+    // Obtener el modo guardado del almacenamiento local al cargar la página
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode === 'dark-mode') {
+      body.classList.add('dark-mode');
+      body.classList.remove('light-mode');
+      toggleSwitch.checked = true;
+    }
+    
+    toggleSwitch.addEventListener('change', function() {
+      // Cambiar entre los modos oscuro y claro
+      body.classList.toggle('dark-mode');
+      body.classList.toggle('light-mode');
+    
+      // Guardar el modo seleccionado en el almacenamiento local
+      const currentMode = body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
+      localStorage.setItem('mode', currentMode);
+    });
+</script>

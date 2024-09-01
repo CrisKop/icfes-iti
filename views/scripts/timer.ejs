@@ -1,0 +1,48 @@
+<script>
+   let tiempo = document.getElementById("timer").textContent;
+    var timeA = tiempo.split(":");
+    var hrs = parseInt(timeA[0]);
+    var mins = parseInt(timeA[1]);
+    var segs = parseInt(timeA[2]);
+    
+    setInterval(updateTimer, 1000);
+
+
+    function enviarFormulario() {
+        // Obtener referencia al formulario
+        const form = document.getElementById('contact-form');
+        
+        // Enviar el formulario
+        form.submit();
+      }
+
+    function updateTimer() {
+        segs--; // Incrementa los segundos
+      
+        if (segs < 0) {
+          // Si los segundos llegan a 60, incrementa los minutos
+          segs = 59;
+          mins--;
+          if (mins < 0) {
+            // Si los minutos llegan a 60, incrementa las horas
+            mins = 59;
+            if(hrs === 0){
+                enviarFormulario();
+            } else {
+            hrs--;
+            }
+          }
+        }
+      
+        // Formatea el tiempo en el formato HH:MM:SS
+        const formattedTime = `${padZero(hrs)}:${padZero(mins)}:${padZero(segs)}`;
+      
+        // Actualiza el contenido del elemento con el nuevo tiempo
+        document.getElementById("timer").textContent = formattedTime;
+      }
+      
+      function padZero(number) {
+        // Añade un cero delante de un número si es menor que 10
+        return number < 10 ? "0" + number : number;
+      }
+</script>

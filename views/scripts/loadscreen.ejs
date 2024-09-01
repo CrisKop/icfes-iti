@@ -1,0 +1,27 @@
+<script>
+
+    document.getElementById('body').style.overflow = "hidden";
+
+    window.onload = function() {
+
+       
+  var objeto = document.getElementById('loadscreen'); // reemplaza 'id-del-objeto' con el id real del objeto
+  var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  objeto.style.top = scrollPos + 'px';
+  objeto.style.left = '0px'; // establece la posición izquierda del objeto en 0px o cualquier otra posición deseada
+
+        let tl = gsap.timeline()
+        tl.to('#loadscreen', {opacity: 0}, "1");
+
+        setTimeout(() => {
+            document.getElementById('loadscreen').style.display = 'none';
+            document.getElementById('body').style.overflowY = "scroll";
+            document.getElementById('body').style.overflowX = "hidden";
+    }, 1300);
+
+
+
+}
+
+
+</script>

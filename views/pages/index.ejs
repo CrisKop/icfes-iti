@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11/dist/gsap.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refuerzo Icfes - ITI</title>
+</head>
+<body id="body">
+  
+  <section id="loadscreen" class="loadscreencontainer">
+    <div class="wrapper">
+        <div class="belt">
+            <div class="t" style='--index: 0'></div>
+            <div class="t" style='--index: 1'></div>
+            <div class="t" style='--index: 2'></div>
+            <div class="t" style='--index: 3'></div>
+            <div class="t" style='--index: 4'></div>
+            <div class="t" style='--index: 5'></div>
+            <div class="t" style='--index: 6'></div>
+            <div class="t" style='--index: 7'></div>
+            <div class="t" style='--index: 8'></div>
+            <div class="t" style='--index: 9'></div>
+        </div>
+        <div class="box" style='--index: 0'></div>
+        <div class="box" style='--index: 1'></div>
+        <div class="box" style='--index: 2'></div>
+        <div class="box" style='--index: 3'></div>
+        <div class="box" style='--index: 4'></div>
+    </div>
+    <div>
+        <h1>CrisKop</h1>
+    </div>
+</section>
+
+<div onclick="window.location.href='/profile'" class="user">
+  <div class="cuenta"></div>
+</div>
+
+  <div id="menu">
+    <div onmouseleave="defaultposition()" id="menu-items">
+      <!-- I made these divs instead of links so you can click on mobile to view the effect -->
+      <div onmouseover="changeposition('ing')" onclick="redirect('ing')" id="ing" class="menu-item">Inglés</div>
+      <div onmouseover="changeposition('mat')" onclick="redirect('mat')" id="mat" class="menu-item">Matemáticas</div>
+      <div onmouseover="changeposition('lec')" onclick="redirect('lec')" id="lec" class="menu-item">Lectura Crítica</div>
+      <div onmouseover="changeposition('soc')" onclick="redirect('soc')" id="soc" class="menu-item">Sociales</div>
+      <div onmouseover="changeposition('nat')" onclick="redirect('nat')" id="nat" class="menu-item">Naturales</div>
+    </div>
+    <div id="menu-background-pattern"></div>
+    <div id="menu-background-image"></div>
+  </div>
+
+
+  
+ 
+
+
+
+  <!--Creates the popup body-->
+
+
+  <div style="z-index:999;" class="popup-overlay">
+    <!--Creates the popup content-->
+     <div class="popup-content">
+      <%if(login === 1){%>
+        <h2>✔️ Iniciaste sesión ✔️</h2>
+        <h1> Elige de nuevo la materia </h1>
+        <%}%>
+        <%if(login === 2){%>
+          <h2>✔️ Respuestas enviadas ✔️</h2>
+          <button onclick="window.location.href='/results/<%=respid%>'">Ver resultado</button>   
+          <%}%>
+       <!--popup's close button-->
+        <button class="close">Close</button>   
+  </div>
+
+
+  <%if(login !== null){%>
+  <script>
+  
+  $(document).ready(function() {
+    //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+  
+  $(".popup-overlay, .popup-content").addClass("active");
+  
+  //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+  $(".close, .popup-overlay .close").on("click", function(){
+  $(".popup-overlay, .popup-content").removeClass("active");
+
+  console.log("a")
+  });
+  
+  })
+  
+  </script>
+  <%}%>
+
+
+</body>
+</html>
+<script>const {gsap} = window;</script>
+<%-include('../scripts/indexgsap')%>
+<%-include('../scripts/loadscreen')%>
+<%-include('../scripts/matselectoranimation')%>

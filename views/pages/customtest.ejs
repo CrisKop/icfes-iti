@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/css/addquestion.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11/dist/gsap.min.js"></script>
+  <link href='https://unpkg.com/css.gg@2.0.0/icons/css/mail.css' rel='stylesheet'>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pruebas Personalizadas - Refuerzo Icfes - ITI </title>
+</head>
+<body id="body" class="light-mode">
+
+  <section id="loadscreen" class="loadscreencontainer">
+    <div class="wrapper">
+        <div class="belt">
+            <div class="t" style='--index: 0'></div>
+            <div class="t" style='--index: 1'></div>
+            <div class="t" style='--index: 2'></div>
+            <div class="t" style='--index: 3'></div>
+            <div class="t" style='--index: 4'></div>
+            <div class="t" style='--index: 5'></div>
+            <div class="t" style='--index: 6'></div>
+            <div class="t" style='--index: 7'></div>
+            <div class="t" style='--index: 8'></div>
+            <div class="t" style='--index: 9'></div>
+        </div>
+        <div class="box" style='--index: 0'></div>
+        <div class="box" style='--index: 1'></div>
+        <div class="box" style='--index: 2'></div>
+        <div class="box" style='--index: 3'></div>
+        <div class="box" style='--index: 4'></div>
+    </div>
+    <div>
+        <h1>CrisKop</h1>
+    </div>
+</section>
+
+<header class="hero" id="start">
+    <%- include('../partials/nav', {logo: 1})%>
+ </header>
+
+<section class="bgxd">
+    <div class="circles">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    </div>
+</section>
+    
+
+<section class="allcontainer" style="align-self: center;">
+
+
+    <section class="center title">
+        <p>Mis exámenes personalizados:</p>
+      </section>
+
+      <%if(forms.length <= 0){%>
+        <section class="resultsinfo nohay">
+            <h2>No has creado exámenes personalizados</h2>
+            </section>
+      <%}%>
+
+    <section class="resultscontainer">
+        <% let matvar = {"ing":"Inglés","mat":"Matemáticas","lec":"Lectura Crítica","soc":"Ciencias Sociales","nat":"Ciencias Naturales"}%>
+        <%forms.forEach(function(form){%>
+            <div onclick="window.location.href='/test/<%=form.customid%>'" class="resultspanel center formhover">
+                <div class="pfresults fixwidth">
+                <h1><%=matvar[form.mat]%></h1>
+                <h2>ID: <%=form.customid%></h2>
+                <h2><%=form.questions%></h2>
+                 </div>
+            </div>
+        <%})%>
+
+    </section>
+
+    <section class="addcustomcontainer center title">
+        <button id="custombutton" class="adminbutton addcustom" style="width: fit-content;">Crear nuevo</button>
+        <%-include('../partials/custommatselector')%>
+      </section>
+
+
+</section>
+
+</body>
+</html>
+<script>const {gsap} = window;</script>
+
+<%-include('../scripts/loadscreen')%>
+

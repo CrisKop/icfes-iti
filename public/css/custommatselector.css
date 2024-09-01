@@ -1,0 +1,37 @@
+.addcustomcontainer {
+  position: relative;
+  overflow: visible;
+}
+
+#customselector {
+  position: absolute;
+  top: 50px;
+  width: 90vw;
+  max-width: 300px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: rgb(221, 221, 221);
+  border: 1px solid black;
+  display: none;
+  flex-wrap: wrap;
+  transition: display 0.3s;
+}
+#customselector .button {
+  cursor: pointer;
+  flex-grow: 1;
+  height: 50px;
+  width: 300px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #000;
+  background: rgba(212, 212, 212, 0.1);
+}
+#customselector .button:nth-child(even) {
+  background: rgba(0, 0, 0, 0.1);
+}
+#customselector .button:hover {
+  background: rgba(85, 235, 255, 0.3);
+}/*# sourceMappingURL=custommatselector.css.map */

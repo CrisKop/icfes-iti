@@ -1,0 +1,25 @@
+<script>
+
+function aplicar() {
+  console.log("Button clicked");
+
+  let rango = document.getElementById("changerank").value.split("-")[1];
+  let email = document.getElementById("changerank").value.split("-")[0];
+  const formData = new FormData(); // create a new form data object
+  formData.append("rango", rango); // add the value of rango to the form data object with a key "rango"
+  formData.append("email", email);
+  // send the form data to the server using an AJAX request
+  fetch("/changerank", {
+  method: "POST",
+  body: formData,
+})
+    .then((response) => {
+      console.log("Form data uploaded successfully!");
+      window.location.href = "/admin/manageusers?u=0";
+    })
+    .catch((error) => {
+      console.error("Error uploading form data:", error);
+      window.location.href = "/admin/manageusers?u=1";
+    });
+}
+</script>

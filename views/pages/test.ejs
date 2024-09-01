@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/css/form.css">
+  <link href='https://unpkg.com/css.gg@2.0.0/icons/css/mail.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11/dist/gsap.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% let matvar = {"ing":"Inglés","mat":"Matemáticas","lec":"Lectura Crítica","soc":"Ciencias Sociales","nat":"Ciencias Naturales"}%>
+  <title><%=matvar[mat]%> - Refuerzo Icfes - ITI</title>
+</head>
+<body class="<%=mat%> light-mode" id="body">
+
+    <header class="hero" id="start">
+        <%- include('../partials/nav', {logo: null})%>
+     </header>
+    
+    <section id="loadscreen" class="loadscreencontainer">
+    <div class="wrapper">
+        <div class="belt">
+            <div class="t" style='--index: 0'></div>
+            <div class="t" style='--index: 1'></div>
+            <div class="t" style='--index: 2'></div>
+            <div class="t" style='--index: 3'></div>
+            <div class="t" style='--index: 4'></div>
+            <div class="t" style='--index: 5'></div>
+            <div class="t" style='--index: 6'></div>
+            <div class="t" style='--index: 7'></div>
+            <div class="t" style='--index: 8'></div>
+            <div class="t" style='--index: 9'></div>
+        </div>
+        <div class="box" style='--index: 0'></div>
+        <div class="box" style='--index: 1'></div>
+        <div class="box" style='--index: 2'></div>
+        <div class="box" style='--index: 3'></div>
+        <div class="box" style='--index: 4'></div>
+    </div>
+    <div>
+        <h1>CrisKop</h1>
+    </div>
+</section>
+
+
+
+<section class="bgxd">
+    <div class="circles">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    </div>
+</section>
+
+
+ 
+
+<section class="formcontainer">
+<div class="panel topmark">
+    <%if(mat === "ing"){%>
+        <h1>Examen de Ingles</h1>
+        <%}else if(mat === "mat"){%>
+        <h1>Examen de Matemáticas</h1>
+        <%}else if(mat === "lec"){%>
+        <h1>Examen de Lectura Crítica</h1>
+        <%}else if(mat === "soc"){%>
+        <h1>Examen de Competencias Ciudadanas</h1>
+        <%}else if(mat === "nat"){%>
+        <h1>Examen de Ciencias Naturales</h1>
+        <%}%>
+    <br>
+    <h2>Formulario de examen para calificar.</h2>
+    <br>
+ 
+    <section class="emailcontainer">
+    <div class="emailicon">
+        <i class="gg-mail"></i>
+    </div>
+    <div class="email">
+        <div>
+        <h2 style="font-weight: 700;"><%=user.email%></h2> <h2>(Correo actual)</h2>
+        </div>
+        <div>
+        <a href="/auth/google">Cambiar de cuenta</a>
+        </div>
+    </div>
+    </section>
+</div>
+
+<form action="/customform" method="POST" id="contact-form">
+    
+<input style="display: none;" type="text" name="userinfo" value="<%=user.email%>" readonly> 
+
+<div class="panel">
+    <h3>Tiempo límite:</h3>
+    <h1 id="timer">1:30:00</h1>
+    <%-include('../scripts/timer')%>
+    </div>
+    <div class="panel">
+        <label class="required" for="">Nombres y apellidos</label>
+        <br>
+        <input type="text" name="userinfo" value="<%=user.name%>" readonly>
+    </div>
+
+    <input style="display: none;" type="text" name="userinfo" value="<%=mat%>" readonly> 
+<input style="display: none;" type="text" name="userinfo" value="<%=customid%>" readonly> 
+
+    <%questions.forEach(function(q){%>
+
+        <%if(q.type === 1){%>
+    <div class="panel">
+        <img class="previewImage" id="previewImage" src="/uploads/<%=q.filename%>" alt="Preview Image">
+    </div>
+
+    <% } else { %>
+
+        <div class="panel moregap">
+            <div class="title">
+            <h1 class="required"><%=q.question%>.</h1>
+        </div>
+
+
+            <%if(q.filename){%>
+            <img class="previewImage" id="previewImage" src="/uploads/<%=q.filename%>" alt="Preview Image">
+            <%}%>
+
+            <% function convertNumberToLetter(number) {
+                if (number < 1 || number > 26) {
+                  return null; // devuelve null si el número está fuera del rango 1-26
+                }
+                const charCode = number + 64; // convierte el número a su correspondiente código ASCII
+                return String.fromCharCode(charCode); // devuelve la letra correspondiente
+            }%>
+
+            <div id="opciones" class="opciones">
+               
+                
+
+                <% for (let i = 0; i < q.cantidadrespuestas; i++) { %>
+                    <div>
+                        <input type="radio" name="p<%=q.cod%>" value="<%=q.question%>-<%=i%>" required>
+                        <label for=""><%=convertNumberToLetter(i+1)%></label>
+                    </div>
+                  <%}}%>
+            </div>
+            
+        </div>
+<%});%>
+
+
+    <div class="end">
+    <button class="boton" type="submit">Enviar</button>
+    <button class="boton" type="button" onclick="window.location.href='/'">Volver</button>
+    </div>
+
+</form>
+
+</section>
+
+
+<div style="z-index:999;" id="popup-overlay" class="popup-overlay">
+    <!--Creates the popup content-->
+     <div class="popup-content">
+
+      <img id="closeview" src="/img/lec.png">
+      
+       <!--popup's close button-->
+        <button style="color: green; padding: 10px;" class="close">Close</button>   
+  </div>
+
+
+
+  <script>
+
+    $(document).ready(function() {
+        // Función para mostrar el popup y establecer el src de la imagen en el popup
+        function showCloseView(src) {
+          $("#closeview").attr("src", src);
+          $(".popup-overlay, .popup-content").addClass("active");
+          $('body').css('overflow-y', 'hidden');
+      
+          var objeto = document.getElementById('popup-overlay');
+          var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          objeto.style.top = scrollPos + 'px';
+          objeto.style.left = '0px';
+        }
+      
+        // Agrega el evento de clic a todas las imágenes con la clase "previewImage"
+        $(".previewImage").on("click", function() {
+          var imgSrc = $(this).attr("src"); // Obtiene el valor de "src" de la imagen clickeada
+          showCloseView(imgSrc); // Muestra el popup y establece el src de la imagen en el popup
+        });
+      
+        // Remueve la clase "active" de .popup-overlay y .popup-content cuando se hace clic en el botón "Close"
+        $(".close, .popup-overlay .close").on("click", function() {
+          $(".popup-overlay, .popup-content").removeClass("active");
+          $('body').css('overflow-y', 'scroll');
+          $('body').css('overflow-x', 'hidden');
+        });
+      });
+  </script>
+</body>
+</html>
+<script>const {gsap} = window;</script>
+
+<%-include('../scripts/loadscreen')%>
+<%-include('../scripts/preventdragimg')%>

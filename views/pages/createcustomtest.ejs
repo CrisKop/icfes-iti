@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/css/addquestion.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11/dist/gsap.min.js"></script>
+  <link href='https://unpkg.com/css.gg@2.0.0/icons/css/mail.css' rel='stylesheet'>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear personalizados - Refuerzo Icfes - ITI </title>
+</head>
+<body id="body" class="light-mode">
+
+  <section id="loadscreen" class="loadscreencontainer">
+    <div class="wrapper">
+        <div class="belt">
+            <div class="t" style='--index: 0'></div>
+            <div class="t" style='--index: 1'></div>
+            <div class="t" style='--index: 2'></div>
+            <div class="t" style='--index: 3'></div>
+            <div class="t" style='--index: 4'></div>
+            <div class="t" style='--index: 5'></div>
+            <div class="t" style='--index: 6'></div>
+            <div class="t" style='--index: 7'></div>
+            <div class="t" style='--index: 8'></div>
+            <div class="t" style='--index: 9'></div>
+        </div>
+        <div class="box" style='--index: 0'></div>
+        <div class="box" style='--index: 1'></div>
+        <div class="box" style='--index: 2'></div>
+        <div class="box" style='--index: 3'></div>
+        <div class="box" style='--index: 4'></div>
+    </div>
+    <div>
+        <h1>CrisKop</h1>
+    </div>
+</section>
+
+<header class="hero" id="start">
+    <%- include('../partials/nav', {logo: 1})%>
+ </header>
+
+<section class="bgxd">
+    <div class="circles">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    </div>
+</section>
+    
+
+<section class="allcontainer" style="align-self: center;">
+
+
+    <section class="center title">
+        <p>Crear un examen personalizado:</p>
+        <h2>Rango de preguntas:</h2>
+        <h6 style="font-weight: 400; max-width: 700px; text-align: center;">Para seleccionar las preguntas que aparecerán, arrastra sobre cada una de las preguntas que quieres seleccionar y al finalizar dale al botón de crear nuevo. <br><br>Los paneles con * son un enunciado.</h6>
+      </section>
+
+      <%if(questions.length <= 0){%>
+        <section class="resultsinfo nohay">
+            <h2>No hay preguntas para seleccionar</h2>
+            </section>
+      <%}%>
+
+      <% let matvar = {"ing":"Inglés","mat":"Matemáticas","lec":"Lectura Crítica","soc":"Ciencias Sociales","nat":"Ciencias Naturales"}%>
+
+    <section class="resultscontainer">
+        
+        <%questions.forEach(function(question){%>
+            <div class="circle"></div>
+            <div class="resultspanel center number" style="cursor: pointer;" onclick="changeColorAndAddToArray('<%=question.cod%>')">
+                <div class="pfresults">
+                    <% if(question.type === 1){%>
+                        <img id="previewImage" src="/uploads/<%=question.filename%>" alt="Preview Image">
+                        <h3><%=question.cod%></h3>
+                        <%}%>
+                <% if(question.type === 2){%>
+                    <% if(question.filename){%>
+                        <img id="previewImage" src="/uploads/<%=question.filename%>" alt="Preview Image">
+                        <%}%>
+                    <h1>P<%=question.question%></h1>
+                    <h3><%=question.cod%></h3>
+                    <%}%>
+                 </div>
+            </div>
+        <%})%>
+
+    </section>
+
+    <section class="addcustomcontainer center title">
+        <button onclick="crearcustom(clickedArray)" class="adminbutton customcreate" id="customcreate" type="button">Crear</button>
+      </section>
+
+
+</section>
+
+</body>
+</html>
+<script>const {gsap} = window;</script>
+
+<%-include('../scripts/loadscreen')%>
+<%-include('../scripts/createcustomscripts')%>
+<%-include('../scripts/preventdragimg')%>
+

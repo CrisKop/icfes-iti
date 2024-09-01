@@ -1,0 +1,131 @@
+<script>
+    const container = document.querySelector('.resultscontainer');
+const circle = document.querySelector('.circle');
+
+let isActive = false;
+
+container.addEventListener('mousedown', (event) => {
+  isActive = true;
+  circle.classList.add('active');
+});
+
+container.addEventListener('mouseup', (event) => {
+  isActive = false;
+  circle.classList.remove('active');
+});
+
+
+container.addEventListener('mouseleave', (event) => {
+  isActive = false;
+  circle.classList.remove('active');
+});
+
+
+container.addEventListener('mousemove', (event) => {
+  if (isActive) {
+    const x = event.clientX;
+    const y = event.clientY;
+    circle.style.left = `${x - 25}px`;
+    circle.style.top = `${y - 25}px`;
+    const elements = document.elementsFromPoint(x, y);
+    for (const element of elements) {
+      element.classList.toggle('inverted');
+    }
+  }
+});
+
+
+</script>
+
+
+<script>
+  let clickedArray = [];
+  let isSelecting = false;
+
+  let resultscontainer = document.querySelector(".resultscontainer");
+
+  resultscontainer.addEventListener("mousedown", function() {
+    isSelecting = true;
+  });
+
+  resultscontainer.addEventListener("mousemove", function(event) {
+    if (isSelecting) {
+      let resultspanel = event.target.closest(".resultspanel");
+      if (resultspanel) {
+        let cod = resultspanel.querySelector("h3").innerText;
+        let index = clickedArray.indexOf(cod);
+        if (index === -1) {
+          resultspanel.style.backgroundColor = "#318048";
+          clickedArray.push(cod);
+          clickedArray.sort((a, b) => a - b);
+        }
+      }
+    }
+  });
+
+  let resultspanels = document.querySelectorAll(".resultspanel");
+
+  resultspanels.forEach(function(resultspanel) {
+    resultspanel.addEventListener("mouseenter", function() {
+      if (isSelecting) {
+        let cod = this.querySelector("h3").innerText;
+        let index = clickedArray.indexOf(cod);
+        if (index === -1) {
+          this.style.backgroundColor = "#318048";
+          clickedArray.push(cod);
+          clickedArray.sort((a, b) => a - b);
+        }
+      }
+    });
+  });
+
+  resultscontainer.addEventListener("mouseup", function() {
+    isSelecting = false;
+  });
+
+  function changeColorAndAddToArray(cod) {
+    let resultspanel = event.currentTarget;
+    let index = clickedArray.indexOf(cod);
+    if (index === -1) {
+      resultspanel.style.backgroundColor = "#318048";
+      clickedArray.push(cod);
+      clickedArray.sort((a, b) => a - b);
+    } else {
+      resultspanel.style.backgroundColor = "";
+      clickedArray.splice(index, 1);
+    }
+    console.log(clickedArray)
+  }
+</script>
+
+
+
+
+<script>
+  function crearcustom() {
+  console.log("Button clicked");
+
+  let datos = clickedArray;
+  let mat = `<%=mat%>`;
+  let email = `<%=user.email%>`;
+  const formData = new FormData(); // create a new form data object
+  formData.append("questions", datos); // add the value of rango to the form data object with a key "rango"
+  formData.append("mat", mat);
+  formData.append("email", email);
+  // send the form data to the server using an AJAX request
+  fetch("/createcustom", {
+  method: "POST",
+  body: formData,
+})
+    .then((response) => {
+      console.log("Form data uploaded successfully!");
+      window.location.href = "/admin/custom?u=0";
+    })
+    .catch((error) => {
+      console.error("Error uploading form data:", error);
+      window.location.href = "/admin/custom?u=1";
+    });
+}
+</script>
+
+

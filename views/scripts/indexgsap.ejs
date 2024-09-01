@@ -1,0 +1,58 @@
+<script>
+
+function redirect(materia){
+    let tl = gsap.timeline()
+
+    var centerY = window.innerHeight / 2;
+    var itemY = document.getElementById(`${materia}`).offsetTop + document.getElementById(`${materia}`).offsetHeight/2;
+    var y = centerY - itemY - (document.getElementById(`${materia}`).offsetHeight)/2;
+
+    if(materia === "ing"){
+    tl.to('#mat', {opacity: 0})
+    tl.to('#lec', {opacity: 0}, "0.1")
+    tl.to('#soc', {opacity: 0}, "0.2")
+    tl.to('#nat', {opacity: 0}, "0.3")
+    tl.to("#ing", {y: y, ease: "EaseInOut"}, "0.5")
+    }
+
+    if(materia === "mat"){
+        tl.to('#ing', {opacity: 0})
+    tl.to('#lec', {opacity: 0}, "0.1")
+    tl.to('#soc', {opacity: 0}, "0.2")
+    tl.to('#nat', {opacity: 0}, "0.3")
+    tl.to("#mat", {y: y, ease: "EaseInOut"}, "0.5")
+    }
+    
+    if(materia === "lec"){
+        tl.to('#mat', {opacity: 0})
+    tl.to('#ing', {opacity: 0}, "0.1")
+    tl.to('#soc', {opacity: 0}, "0.2")
+    tl.to('#nat', {opacity: 0}, "0.3")
+    tl.to("#lec", {y: y, ease: "EaseInOut"}, "0.5")
+    }
+
+    if(materia === "soc"){
+        tl.to('#mat', {opacity: 0})
+    tl.to('#lec', {opacity: 0}, "0.1")
+    tl.to('#ing', {opacity: 0}, "0.2")
+    tl.to('#nat', {opacity: 0}, "0.3")
+    tl.to("#soc", {y: y, ease: "EaseInOut"}, "0.5")
+    }
+    
+    if(materia === "nat"){
+        tl.to('#mat', {opacity: 0})
+    tl.to('#lec', {opacity: 0}, "0.1")
+    tl.to('#soc', {opacity: 0}, "0.2")
+    tl.to('#ing', {opacity: 0}, "0.3")
+    tl.to("#nat", {y: y, ease: "EaseInOut"}, "0.5")
+    }
+    
+
+    setTimeout(() => {
+        window.location.href = "/"+`${materia}`;
+    }, 1500)
+
+
+}
+
+</script>

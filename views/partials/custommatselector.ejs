@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/custommatselector.css">
+
+        <div id="customselector" class="customselector">
+            <div onclick="window.location.href='/admin/custom/create?mat=ing'" class="button">Inglés</div>
+            <div onclick="window.location.href='/admin/custom/create?mat=mat'" class="button">Matemáticas</div>
+            <div onclick="window.location.href='/admin/custom/create?mat=lec'" class="button">Lectura Crítica</div>
+            <div onclick="window.location.href='/admin/custom/create?mat=soc'" class="button">Ciencias Sociales</div>
+            <div onclick="window.location.href='/admin/custom/create?mat=nat'" class="button">Ciencias Naturales</div>
+        </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              // Obtener el botón y el div con la clase "customselector"
+              var button = document.querySelector(".adminbutton.addcustom");
+              var selector = document.querySelector("#customselector");
+              
+              // Agregar un event listener al botón
+              button.addEventListener("click", function() {
+                // Alternar la clase "show" en el div con la clase "customselector"
+                selector.style.display = "flex"
+              });
+              
+              // Agregar un event listener al objeto document
+              document.addEventListener("click", function(event) {
+                // Verificar si el evento se origina fuera del botón y del div con la clase "customselector"
+                if (!event.target.matches(".adminbutton.addcustom") && !event.target.matches("#customselector *")) {
+                  // Quitar la clase "show" del div con la clase "customselector"
+                  selector.style.display = "none"
+                }
+              });
+            });
+          </script>

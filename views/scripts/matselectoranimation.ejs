@@ -1,0 +1,71 @@
+<script>
+    function changeposition(mat){
+        let tl = gsap.timeline()
+     var menuBackground = document.getElementById('menu-background-image');
+  var menuBackgroundPattern = document.getElementById('menu-background-pattern');
+
+
+  let bgisize;
+  let bgipos;
+  let bgpsize;
+  let bgimage;
+  let bgopacity = 0.1;
+  let bgpopacity = 0.5;
+  if(mat === "ing"){
+  bgisize = "100vmax";
+  bgipos = "400px 0px";
+  bgpsize = "11vmin 11vmin";
+  bgimage = 'url("../img/ingles.png")';
+  
+        } else if(mat === "mat"){
+  bgisize = "130vmax";
+  bgipos = "-200px 30px";
+  bgpsize = "9vmin 9vmin";
+  bgimage = 'url("../img/matematicas.png")';
+        }
+        else if(mat === "lec"){
+  bgisize = "80vmax";
+  bgipos = "600px -100px";
+  bgpsize = "13vmin 13vmin";
+  bgimage = 'url("../img/lec.png")';
+        }
+        else if(mat === "soc"){
+  bgisize = "200vmax";
+  bgipos = "100px -500px";
+  bgpsize = "16vmin 16vmin";
+  bgimage = 'url("../img/soc.png")';
+        }
+        else if(mat === "nat"){
+  bgisize = "150vmax";
+  bgipos = "0px -500px";
+  bgpsize = "20vmin 20vmin";
+  bgimage = 'url("../img/nat.png")';
+        }
+
+        tl.to('#menu-background-image', {opacity: 0.1, duration: 0.1})
+        tl.set('#menu-background-image', {backgroundImage: bgimage})
+  .to('#menu-background-image', {opacity: 0.1, duration: 0.1, ease: "power1.inOut"})
+
+        menuBackground.style.backgroundSize = bgisize;
+       // menuBackground.style.opacity = bgopacity;
+  menuBackground.style.backgroundPosition = bgipos;
+  //menuBackgroundPattern.style.backgroundSize = bgpsize;
+  //menuBackgroundPattern.style.opacity = bgpopacity;
+
+    }
+
+    function defaultposition(){
+        let tl = gsap.timeline()
+        var menuBackground = document.getElementById('menu-background-image');
+  var menuBackgroundPattern = document.getElementById('menu-background-pattern');
+
+tl.to('#menu-background-image', {opacity: 0.1, duration: 0.1})
+        tl.set('#menu-background-image', {backgroundImage: 'url("../img/bg.jpg")'})
+  .to('#menu-background-image', {opacity: 0.1, duration: 0.1, ease: "power1.inOut"})
+  
+  menuBackground.style.backgroundSize = "100vmax";
+  menuBackground.style.backgroundPosition = "center 40%";
+  menuBackgroundPattern.style.backgroundSize = "12vmin 12vmin";
+}
+
+</script>

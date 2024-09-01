@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/css/addquestion.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11/dist/gsap.min.js"></script>
+  <link href='https://unpkg.com/css.gg@2.0.0/icons/css/mail.css' rel='stylesheet'>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ManageUsers - Refuerzo Icfes - ITI </title>
+</head>
+<body id="body" class="light-mode">
+
+  <section id="loadscreen" class="loadscreencontainer">
+    <div class="wrapper">
+        <div class="belt">
+            <div class="t" style='--index: 0'></div>
+            <div class="t" style='--index: 1'></div>
+            <div class="t" style='--index: 2'></div>
+            <div class="t" style='--index: 3'></div>
+            <div class="t" style='--index: 4'></div>
+            <div class="t" style='--index: 5'></div>
+            <div class="t" style='--index: 6'></div>
+            <div class="t" style='--index: 7'></div>
+            <div class="t" style='--index: 8'></div>
+            <div class="t" style='--index: 9'></div>
+        </div>
+        <div class="box" style='--index: 0'></div>
+        <div class="box" style='--index: 1'></div>
+        <div class="box" style='--index: 2'></div>
+        <div class="box" style='--index: 3'></div>
+        <div class="box" style='--index: 4'></div>
+    </div>
+    <div>
+        <h1>CrisKop</h1>
+    </div>
+</section>
+
+<header class="hero" id="start">
+    <%- include('../partials/nav', {logo: 1})%>
+ </header>
+
+<section class="bgxd">
+    <div class="circles">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    </div>
+</section>
+    
+
+<section class="allcontainer" style="align-self: center;">
+
+
+    <section class="center title">
+        <p>Usuarios:</p>
+      </section>
+
+      <%if(allusers.length <= 0){%>
+        <section class="resultsinfo nohay">
+            <h2>No hay usuarios</h2>
+            </section>
+      <%}%>
+
+    <section class="resultscontainer">
+       <%let users = allusers.filter(e => e.email.endsWith("itilpn.edu.co"));%>
+
+        <%users.forEach(function(user){%>
+            <div class="resultspanel center formhover">
+                <div class="pfresults">
+                <h2 onclick="window.location.href='/profile/<%=user.email.split(`@`)[0]%>'"><%=user.email%></h2>
+                <h2 onclick="window.location.href='/profile/<%=user.email.split(`@`)[0]%>'"><%=user.name%></h2>
+                <div class="manageuserscardchange">
+                <select name="changerank" id="changerank" class="changerank">
+                    <%let rankarray = ["user", "prof", "admin"].filter(u => u !== user.rank)%>
+                    <option value="<%=user.email%>-<%=user.rank%>" selected><%=user.rank%></option>
+                    <%rankarray.forEach(function(r){%>
+                        <option value="<%=user.email%>-<%=r%>"><%=r%></option>
+                    <%})%>
+                    
+                    </select>
+                    <button onclick="aplicar()" class="botonaplicar" id="apply" type="button">Aplicar</button>
+                </div>
+                 </div>
+            </div>
+        <%})%>
+
+    </section>
+
+
+</section>
+
+
+<!--Creates the popup body-->
+<div style="z-index: 1;" class="popup-overlay">
+    <!--Creates the popup content-->
+    <div class="popup-content">
+      <% if (newElementCod === 0) { %>
+      <h2>✔️ Rango cambiado correctamente ✔️</h2>
+      <% } %>
+      <% if (newElementCod === 1) { %>
+      <h2>⚠️ Error ⚠️</h2>
+      <% } %>
+      <!--popup's close button-->
+      <button class="close">Close</button>
+    </div>
+  </div>
+  
+  <% if (newElementCod !== null) { %>
+  <script>
+    $(document).ready(function() {
+      //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+      $(".popup-overlay, .popup-content").addClass("active");
+      $("#body").css("overflow", "hidden");
+  
+      //removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+      $(".close, .popup-overlay").on("click", function() {
+        $(".popup-overlay, .popup-content").removeClass("active");
+        $("#body").css("overflow", "auto");
+      });
+    });
+  </script>
+  <% } %>
+
+</body>
+</html>
+<script>const {gsap} = window;</script>
+
+<%-include('../scripts/loadscreen')%>
+<%-include('../scripts/changerank')%>
+

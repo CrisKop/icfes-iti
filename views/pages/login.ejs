@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="/css/login.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11/dist/gsap.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Refuerzo Icfes - ITI </title>
+</head>
+<body id="body">
+    
+    <section id="loadscreen" class="loadscreencontainer">
+    <div class="wrapper">
+        <div class="belt">
+            <div class="t" style='--index: 0'></div>
+            <div class="t" style='--index: 1'></div>
+            <div class="t" style='--index: 2'></div>
+            <div class="t" style='--index: 3'></div>
+            <div class="t" style='--index: 4'></div>
+            <div class="t" style='--index: 5'></div>
+            <div class="t" style='--index: 6'></div>
+            <div class="t" style='--index: 7'></div>
+            <div class="t" style='--index: 8'></div>
+            <div class="t" style='--index: 9'></div>
+        </div>
+        <div class="box" style='--index: 0'></div>
+        <div class="box" style='--index: 1'></div>
+        <div class="box" style='--index: 2'></div>
+        <div class="box" style='--index: 3'></div>
+        <div class="box" style='--index: 4'></div>
+    </div>
+    <div>
+        <h1>CrisKop</h1>
+    </div>
+</section>
+
+
+<section id="bg" class="bg">
+    <div class="triangles"></div>
+  </section>
+
+  <section class="login">
+    <div>
+        <h1>Para responder los formularios, primero necesitas iniciar sesión en tu cuenta institucional:</h1>
+        <button onclick='window.location.href=`/auth/google?mat=ing`' type="button">Login</button>
+        <a href="/">Volver</a>
+        <%if(error === 1){%>
+        <span>
+            <h2 class="red">Error al ingresar:</h2>
+            <h3>Solo cuentas institucionales (@itilpn.edu.co)</h3>
+        </span>
+        <%}%>
+
+        <%if(error === 2){%>
+          <span>
+              <h2 class="green">Has cerrado sesión correctamente</h2>
+          </span>
+          <%}%>
+    </div>
+  </section>
+
+
+</body>
+</html>
+<script>const {gsap} = window;</script>
+
+<%-include('../scripts/loadscreen')%>
+<%-include('../scripts/blocksbg')%>
+
